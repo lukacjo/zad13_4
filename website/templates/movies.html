@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Biblioteka</title>
+    <style>
+        table, th, tr, td {border: 1px solid black;}
+    </style>
+</head>
+<a href="/directors"><input type="submit" value="Reżyserzy"></a>
+<h2>Biblioteka moich filmów.</h2>
+<h3>Obejrzane/Do obejrzenia.</h3>
+
+<table>
+    <thead>
+    <th>Tytuł</th>
+    <th>Opinia o filmie</th>
+    <th>Reżyser</th>
+    <th>Czy wypożyczone?</th>
+    <th>Czy obejrzane?</th>
+    </thead>
+{% for movie in movies %}
+    <tr>
+        <td>{{ movie.title }}</a></td>
+        <td>{{ movie.opinion }}</td>
+        <td>{{ movie.director_name }}</td>
+        {% if movie.rented == 0 %}
+        <td>Nie wypożyczone</td>
+        {% else %}
+        <td>Wypożyczone</td>
+        {% endif %}
+        {% if movie.watched == 0 %}
+        <td>Nie obejrzane</td>
+        {% else %}
+        <td>Obejrzane</td>
+        {% endif %}
+        <td><a href="{{ url_for('views.get_movie', id=movie.id )}}"><button type="button"  >Edit</button></a></td>
+    </tr>
+{% endfor %}
+</table>
+
+<div>
+    <h2> Dodaj nowy film: </h2>
+    <form method="POST">
+        <div class="text-center">
+            <p>
+              <input placeholder="Tytuł" name="title">
+            </p>
+              <textarea class="my_forms_area" placeholder="Opinia" name="opinion" ></textarea>
+              <p><input placeholder="Reżyser" name="director"></p>
+              <p>Wypożyczone?<input type="checkbox" name="rented" value="flase"></p>
+              <p>Obejrzane?<input type="checkbox" name="watched" value="true"></p>
+          </div>
+
+        <input type="submit" value="Dodaj film">
+    </form>
+</div>
+</body>
+</html>

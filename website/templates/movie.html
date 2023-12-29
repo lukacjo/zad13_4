@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Film</title>
+    <style>
+        table, th, tr, td {border: 1px solid black;}
+    </style>
+</head>
+<body>
+<div>
+    <h2> Edytuj Film: </h2>
+    <form method="POST">
+        <div class="text-center">
+            <p>
+              <input placeholder="Tytuł" name="title" value="{{movie.title}}">
+            </p>
+            <p>
+                <input placeholder="Opinia" name="opinion" value="{{movie.opinion}}">
+              </p>
+            
+              <p>
+                <input placeholder="Reżyser" name="director" value="{{movie.director_name}}">
+              </p>
+              <p>
+                Czy wypożyczone? <input type="checkbox" name="rented"  {% if movie.rented %}checked{% endif %}>
+              </p>
+              <p>
+                Czy obejrzane? <input type="checkbox" name="watched"  {% if movie.watched %}checked{% endif %}>
+              </p>
+          </div>
+
+        <input type="submit" value="Edytuj film">
+    </form>
+</div>
+</body>
