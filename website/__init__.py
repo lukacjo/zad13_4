@@ -18,7 +18,11 @@ def create_app():
 
     app.register_blueprint(views, url_prefix="/")
 
-    from .models import Movie, Director  # importuje modele do tworzenia danych w bazie
+    from .models import (
+        Movie,
+        Director,
+        Loan,
+    )  # importuje modele do tworzenia danych w bazie
 
     with app.app_context():  # tworze te bazy danych
         db.create_all()

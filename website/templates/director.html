@@ -10,26 +10,28 @@
 <body>
 <div>
     <h2> Edytuj Reżysera: </h2>
+
     <form method="POST">
         <div class="text-center">
             <p>
-              <input placeholder="Imie i Nazwisko" name="name" value="{{director.name}}">
+                <input placeholder="Imie i Nazwisko" name="name" value="{{ director.name }}">
             </p>
             <p>
-                <input placeholder="Wiek" name="age" value="{{director.age}}">
-              </p>
-              <p>
-                <input placeholder="Opinia" name="opinion" value="{{director.opinion}}">
-              </p>
-              <p>
-                <input placeholder="Najlepszy film" name="best_movie" value="{{director.best_movie}}">
-              </p>
-              <p>
-                <input placeholder="Najgorszy film" name="worst_movie" value="{{director.worst_movie}}">
-              </p>
-          </div>
+                <input placeholder="Wiek" name="age" value="{{ director.age }}">
+            </p>
+            <p>
+                <input placeholder="Opinia" name="opinion" value="{{ director.opinion }}">
+            </p>
+            <p>
+                <input placeholder="Najlepszy film" name="best_movie" value="{{ director.best_movie }}">
+            </p>
+            <p>
+                <input placeholder="Najgorszy film" name="worst_movie" value="{{ director.worst_movie }}">
+            </p>
+        </div>
 
         <input type="submit" value="Edytuj informacje o reżyserze">
     </form>
 </div>
 </body>
+</html>

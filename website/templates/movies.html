@@ -7,7 +7,10 @@
         table, th, tr, td {border: 1px solid black;}
     </style>
 </head>
+<body>
 <a href="/directors"><input type="submit" value="Reżyserzy"></a>
+<a href="/movies"><input type="submit" value="Filmy"></a>
+<a href="/loans"><input type="submit" value="Wypożyczenia"></a>
 <h2>Biblioteka moich filmów.</h2>
 <h3>Obejrzane/Do obejrzenia.</h3>
 
@@ -16,23 +19,31 @@
     <th>Tytuł</th>
     <th>Opinia o filmie</th>
     <th>Reżyser</th>
-    <th>Czy wypożyczone?</th>
-    <th>Czy obejrzane?</th>
+    <th>Czy wypożyczony?</th>
+    <th>Czy obejrzany?</th>
     </thead>
 {% for movie in movies %}
     <tr>
-        <td>{{ movie.title }}</a></td>
+        <td>{{ movie.title }}</td>
         <td>{{ movie.opinion }}</td>
-        <td>{{ movie.director_name }}</td>
-        {% if movie.rented == 0 %}
-        <td>Nie wypożyczone</td>
+        <td>
+            {% if movie.directors %}
+        {% for director in movie.directors %}
+            {{ director.name }}{% if not loop.last %}, {% endif %}
+        {% endfor %}
+    {% else %}
+        Brak informacji
+    {% endif %}
+        </td>
+        {% if movie.is_rented() %}
+            <td>Wypożyczony</td>
         {% else %}
-        <td>Wypożyczone</td>
+            <td>Dostępny</td>
         {% endif %}
         {% if movie.watched == 0 %}
-        <td>Nie obejrzane</td>
+            <td>Nie obejrzany</td>
         {% else %}
-        <td>Obejrzane</td>
+            <td>Obejrzany</td>
         {% endif %}
         <td><a href="{{ url_for('views.get_movie', id=movie.id )}}"><button type="button"  >Edit</button></a></td>
     </tr>
@@ -44,13 +55,14 @@
     <form method="POST">
         <div class="text-center">
             <p>
-              <input placeholder="Tytuł" name="title">
+                <input placeholder="Tytuł" name="title">
             </p>
-              <textarea class="my_forms_area" placeholder="Opinia" name="opinion" ></textarea>
-              <p><input placeholder="Reżyser" name="director"></p>
-              <p>Wypożyczone?<input type="checkbox" name="rented" value="flase"></p>
-              <p>Obejrzane?<input type="checkbox" name="watched" value="true"></p>
-          </div>
+            <textarea class="my_forms_area" placeholder="Opinia" name="opinion"></textarea>
+            <p>
+                <input placeholder="Reżyserzy (oddziel przecinkiem)" name="directors">
+            </p>
+            <p>Obejrzany?<input type="checkbox" name="watched" value="true"></p>
+        </div>
 
         <input type="submit" value="Dodaj film">
     </form>

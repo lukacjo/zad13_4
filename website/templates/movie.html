@@ -19,12 +19,21 @@
                 <input placeholder="Opinia" name="opinion" value="{{movie.opinion}}">
               </p>
             
+              {% for director in movie.directors %}
+    <p>
+        <label>Reżyser: </label>
+        <input placeholder="Reżyser" name="director{{ loop.index }}" value="{{ director.name }}">
+    </p>
+{% endfor %}
+
+            
               <p>
-                <input placeholder="Reżyser" name="director" value="{{movie.director_name}}">
-              </p>
-              <p>
-                Czy wypożyczone? <input type="checkbox" name="rented"  {% if movie.rented %}checked{% endif %}>
-              </p>
+                {% if movie.is_rented() %}
+                <td>Wypożyczony</td>
+            {% else %}
+                <td>Dostępny</td>
+            {% endif %}
+            </p>
               <p>
                 Czy obejrzane? <input type="checkbox" name="watched"  {% if movie.watched %}checked{% endif %}>
               </p>
@@ -34,3 +43,4 @@
     </form>
 </div>
 </body>
+</html>

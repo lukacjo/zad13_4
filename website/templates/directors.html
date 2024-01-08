@@ -7,8 +7,10 @@
         table, th, tr, td {border: 1px solid black;}
     </style>
 </head>
-
+<body>
+<a href="/directors"><input type="submit" value="Reżyserzy"></a>
 <a href="/movies"><input type="submit" value="Filmy"></a>
+<a href="/loans"><input type="submit" value="Wypożyczenia"></a>
 
 <h2>Reżyserzy</h2>
 <table>
@@ -28,7 +30,8 @@
         <td>{{ director.opinion }}</td>
         <td>{{ director.best_movie }}</td>
         <td>{{ director.worst_movie }}</td>
-        <td><a href="{{ url_for('views.get_director', name_dir=director.name )}}"><button type="button"  >Edit</button></a></td>
+        <td><a href="{{ url_for('views.get_director', director_id=director.id )}}"><button type="button">Edit</button></a></td>
+
 
     </tr>
 </form>

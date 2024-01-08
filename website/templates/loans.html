@@ -1,0 +1,54 @@
+<!-- loans.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wypożyczenia</title>
+    <style>
+        table, th, tr, td {border: 1px solid black;}
+    </style>
+</head>
+<body>
+<a href="/directors"><input type="submit" value="Reżyserzy"></a>
+<a href="/movies"><input type="submit" value="Filmy"></a>
+<a href="/loans"><input type="submit" value="Wypożyczenia"></a>
+<h2>Wypożyczenia</h2>
+<table>
+    <thead>
+        <th>Tytuł Filmu</th>
+        <th>Data Wypożyczenia</th>
+        <th>Data Zwrotu</th>
+    </thead>
+    {% for loan in loans %}
+    <tr>
+        <td>{{ loan.movie.title }}</td>
+        <td>{{ loan.borrowed_date.strftime('%Y-%m-%d %H:%M') }}</td>
+        <td>{{ loan.returned_date.strftime('%Y-%m-%d %H:%M') if loan.returned_date else '' }}</td>
+        <td>
+            {% if not loan.returned_date %}
+                <form method="POST" action="{{ url_for('views.return_movie', loan_id=loan.id) }}" onclick="event.stopPropagation();">
+                    <input type="submit" value="Zwróć">
+                </form>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div>
+    <h2> Dodaj nowe wypożyczenie: </h2>
+    <form method="POST">
+        <div class="text-center">
+            <p>
+                <select name="movie_id">
+                    {% for movie in movies %}
+                        <option value="{{ movie.id }}">{{ movie.title }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+        </div>
+        <input type="submit" value="Dodaj wypożyczenie">
+    </form>
+</div>
+</body>
+</html>
