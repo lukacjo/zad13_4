@@ -28,10 +28,7 @@ def movies_list():
         opinion = request.form.get("opinion")
         watched = request.form.get("watched")
 
-        if watched is None:
-            watched = False
-        else:
-            watched = True
+        watched = True if watched == "1" else False
 
         title = title.title()
         if len(title) < 1:
@@ -137,10 +134,7 @@ def get_movie(id):
         opinion = request.form.get("opinion")
         watched = request.form.get("watched")
 
-        if watched is None:
-            watched = False
-        else:
-            watched = True
+        watched = True if watched == "1" else False
 
         movie.title = title
         movie.opinion = opinion
