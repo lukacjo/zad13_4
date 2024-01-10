@@ -28,7 +28,7 @@ def movies_list():
         opinion = request.form.get("opinion")
         watched = request.form.get("watched")
 
-        watched = True if watched == "1" else False
+        watched = bool(watched)
 
         title = title.title()
         if len(title) < 1:
@@ -72,9 +72,7 @@ def directors_list():
         worst_movie = request.form.get("worst_movie").title()
 
         existing_director = Director.query.filter_by(name=name).first()
-        if existing_director:
-            pass
-        else:
+        if not existing_director:
             new_dir = Director(
                 name=name,
                 age=age,
@@ -134,7 +132,7 @@ def get_movie(id):
         opinion = request.form.get("opinion")
         watched = request.form.get("watched")
 
-        watched = True if watched == "1" else False
+        watched = bool(watched)
 
         movie.title = title
         movie.opinion = opinion
